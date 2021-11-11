@@ -6,14 +6,14 @@ const WeatherApp = () => {
 
     const [city, setCity] = useState(null);
     const [search, setSearch] = useState(null);
-    // const [country, setCountry] = useState(null);
+    const [country, setCountry] = useState(null);
 
     useEffect(() => {
         const fetchApi = async () => {
             const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=46c26c14aeb567380fad3e9cec002150`;
             const response = await fetch(url);
             const resJson = await response.json();
-            // setCountry(resJson.sys);
+            setCountry(resJson.sys);
             setCity(resJson.main);
         }
         fetchApi();
@@ -34,7 +34,7 @@ const WeatherApp = () => {
                     <p className='Nodata'> No City Found </p>
                 ) : (
                     <div>
-                        <p className='cityName'>{` ${search} `}</p>
+                        <p className='cityName'>{` ${search} , ${country.country} `}</p>
 
                         <div className='info'>
                             <p>Temperature <span> {city.temp}°C </span> </p>
